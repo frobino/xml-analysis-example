@@ -39,6 +39,13 @@ TRACEPOINT_EVENT(ust_myprog, connection_end,
 	)
 )
 
+TRACEPOINT_EVENT(ust_myprog, connection_wait,
+	TP_ARGS(int, anint),
+	TP_FIELDS(
+		ctf_integer(int, id, anint)
+	)
+)
+
 #endif /* _TRACEPOINT_UST_MYPROG_H */
 
 #undef TRACEPOINT_INCLUDE_FILE

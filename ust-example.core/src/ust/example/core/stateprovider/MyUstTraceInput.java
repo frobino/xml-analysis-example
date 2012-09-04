@@ -152,6 +152,12 @@ public class MyUstTraceInput implements IStateChangeInput {
                 quark = ss.getQuarkRelativeAndAdd(connAttribute, connectionId.toString());
                 value = TmfStateValue.nullValue();
                 ss.modifyAttribute(t, value, quark);
+
+            } else if (eventName.equals("ust_myprog:connection_wait")) {
+                /* Assign the "Connection Waiting" state */
+                quark = ss.getQuarkRelativeAndAdd(connAttribute, connectionId.toString());
+                value = TmfStateValue.newValueInt(StateValues.CONNECTION_STATUS_WAIT);
+                ss.modifyAttribute(t, value, quark);
             }
 
         } catch (TimeRangeException e) {

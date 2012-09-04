@@ -31,7 +31,8 @@ public class ConnectionsPresentationProvider extends TimeGraphPresentationProvid
 
     private enum State {
         UNKNOWN  (new RGB(100, 100, 100)),
-        ACTIVE   (new RGB(0, 150, 0));
+        ACTIVE   (new RGB(0, 150, 0)),
+        WAIT     (new RGB(255, 220, 0));
 
         public final RGB rgb;
 
@@ -63,6 +64,8 @@ public class ConnectionsPresentationProvider extends TimeGraphPresentationProvid
 
             if (status == StateValues.CONNECTION_STATUS_ACTIVE) {
                 return State.ACTIVE.ordinal();
+            } else if (status == StateValues.CONNECTION_STATUS_WAIT) {
+                return State.WAIT.ordinal();
             }
 
             return -1; // NULL
@@ -78,6 +81,8 @@ public class ConnectionsPresentationProvider extends TimeGraphPresentationProvid
 
             if (status == StateValues.CONNECTION_STATUS_ACTIVE) {
                 return State.ACTIVE.toString();
+            } else if (status == StateValues.CONNECTION_STATUS_WAIT) {
+                return State.WAIT.toString();
             }
 
             return null;

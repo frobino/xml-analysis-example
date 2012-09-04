@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 		usleep(delay1);
 
 		//Connection attempted
+		tracepoint(ust_myprog, connection_wait, id);
 
 		usleep(delay2);
 

@@ -23,5 +23,6 @@ public class StateValues {
 
     /* Connection status */
     public static final int CONNECTION_STATUS_ACTIVE = 1;
+    public static final int CONNECTION_STATUS_WAIT = 2;
 
 }
