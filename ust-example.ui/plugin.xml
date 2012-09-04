@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.linuxtools.tmf.ui.tracetype">
+      <type
+            category="org.eclipse.linuxtools.tmf.ui.category.ctf"
+            event_type="org.eclipse.linuxtools.tmf.core.ctfadaptor.CtfTmfEvent"
+            id="com.ericsson.flex.tracing.tracetype"
+            name="%tracetype.type.myust"
+            trace_type="ust.example.core.trace.MyUstTrace">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="ust.example.ui.views.category"
+            name="%views.category.name">
+      </category>
+      <view
+            category="ust.example.ui.views.category"
+            class="ust.example.ui.views.connections.ConnectionsView"
+            id="ust.example.ui.views.connections"
+            name="%connections.view.name"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>
