@@ -25,7 +25,6 @@ import ust.example.core.stateprovider.StateValues;
  * presentation provider.
  *
  * @author Patrick Tasse
- * @author Alexandre Montplaisir
  */
 public class ConnectionsPresentationProvider extends TimeGraphPresentationProvider {
 

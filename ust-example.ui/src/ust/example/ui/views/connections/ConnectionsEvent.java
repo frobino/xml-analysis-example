@@ -15,14 +15,13 @@ package ust.example.ui.views.connections;
 import org.eclipse.linuxtools.tmf.ui.widgets.timegraph.model.TimeEvent;
 
 /**
- * Time Event implementation specific to the Connections View
+ * Time Event implementation specific to the Oscilloscope View
  *
  * @author Patrick Tasse
- * @author Alexandre Montplaisir
  */
 public class ConnectionsEvent extends TimeEvent {
 
-    private final int fValue;
+    private int fValue = -1;
 
     /**
      * Standard constructor
@@ -53,7 +52,6 @@ public class ConnectionsEvent extends TimeEvent {
      */
     public ConnectionsEvent(ConnectionsEntry entry, long time, long duration) {
         super(entry, time, duration);
-        fValue = -1;
     }
 
     /**

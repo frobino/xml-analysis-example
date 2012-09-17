@@ -131,7 +131,7 @@ public class MyUstTraceInput implements IStateChangeInput {
         fCurrentEvent = event;
 
         String eventName = event.getEventName();
-        long t = event.getTimestampValue();
+        long t = event.getTimestamp().getValue();
 
 
         int quark;
