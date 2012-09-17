@@ -17,11 +17,10 @@ import org.eclipse.linuxtools.tmf.core.event.ITmfEvent;
 import org.eclipse.linuxtools.tmf.core.exceptions.AttributeNotFoundException;
 import org.eclipse.linuxtools.tmf.core.exceptions.StateValueTypeException;
 import org.eclipse.linuxtools.tmf.core.exceptions.TimeRangeException;
-import org.eclipse.linuxtools.tmf.core.statesystem.IStateChangeInput;
+import org.eclipse.linuxtools.tmf.core.statesystem.AbstractStateChangeInput;
 import org.eclipse.linuxtools.tmf.core.statesystem.IStateSystemBuilder;
 import org.eclipse.linuxtools.tmf.core.statevalue.ITmfStateValue;
 import org.eclipse.linuxtools.tmf.core.statevalue.TmfStateValue;
-import org.eclipse.linuxtools.tmf.core.trace.ITmfTrace;
 
 import ust.example.core.trace.MyUstTrace;
 
@@ -43,14 +42,7 @@ import ust.example.core.trace.MyUstTrace;
  * @author Alexandre Montplaisir
  */
 @SuppressWarnings("nls")
-public class MyUstTraceInput implements IStateChangeInput {
-
-    private final MyUstTrace fTrace;
-    private boolean fStateSystemAssigned;
-
-    private IStateSystemBuilder ss;
-
-    private CtfTmfEvent fCurrentEvent;
+public class MyUstTraceInput extends AbstractStateChangeInput {
 
     /* Common locations in the attribute tree */
     private int connAttribute = -1;
@@ -59,22 +51,10 @@ public class MyUstTraceInput implements IStateChangeInput {
      * Constructor
      *
      * @param trace
-     *            The flex trace
+     *            The UST trace
      */
-
     public MyUstTraceInput(MyUstTrace trace) {
-        fTrace = trace;
-        fStateSystemAssigned = false;
-    }
-
-    @Override
-    public ITmfTrace getTrace() {
-        return fTrace;
-    }
-
-    @Override
-    public long getStartTime() {
-        return fTrace.getStartTime().getValue();
+        super(trace);
     }
 
     @Override
@@ -84,55 +64,23 @@ public class MyUstTraceInput implements IStateChangeInput {
 
     @Override
     public void assignTargetStateSystem(IStateSystemBuilder ssb) {
-        this.ss = ssb;
-        fStateSystemAssigned = true;
+        super.assignTargetStateSystem(ssb);
 
         /* Setup common locations */
         connAttribute = ss.getQuarkAbsoluteAndAdd("Connections");
     }
 
-
     @Override
-    public void dispose() {
-        closeStateSystem();
-        fStateSystemAssigned = false;
-        this.ss = null;
-    }
-
-    private void closeStateSystem() {
-        /* Close the History system, if there is one */
-        if (fCurrentEvent == null) {
-            return;
-        }
-        try {
-            ss.closeHistory(fCurrentEvent.getTimestamp().getValue());
-        } catch (TimeRangeException e) {
-            /*
-             * Since we're using currentEvent.getTimestamp, this shouldn't
-             * cause any problem
-             */
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public synchronized void processEvent(ITmfEvent ev) {
-
-        /* Make sure the target state system has been assigned */
-        if (!fStateSystemAssigned) {
-            return;
-        }
+    public synchronized void eventHandle(ITmfEvent ev) {
 
         /* Make sure the event is of the right type */
         if (!(ev instanceof CtfTmfEvent)) {
             return;
         }
         CtfTmfEvent event = (CtfTmfEvent) ev;
-        fCurrentEvent = event;
 
         String eventName = event.getEventName();
         long t = event.getTimestamp().getValue();
-
 
         int quark;
         ITmfStateValue value;

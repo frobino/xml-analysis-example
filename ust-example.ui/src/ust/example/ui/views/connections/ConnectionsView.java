@@ -73,7 +73,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
         for (ITmfTrace trace : experiment.getTraces()) {
             if (trace instanceof MyUstTrace) {
                 MyUstTrace ctfFlexTrace = (MyUstTrace) trace;
-                IStateSystemQuerier ssq = ctfFlexTrace.getStateSystem();
+                IStateSystemQuerier ssq = ctfFlexTrace.getStateSystems().get(MyUstTrace.stateID);
                 long startTime = ssq.getStartTime();
                 long endTime = ssq.getCurrentEndTime() + 1;
                 TraceEntry traceEntry = new TraceEntry(ctfFlexTrace, trace.getName(), startTime, endTime);
@@ -97,7 +97,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
         refresh();
         for (TraceEntry traceEntry : entryList) {
             ITmfTrace ctfFlexTrace = traceEntry.getTrace();
-            IStateSystemQuerier ssq = ctfFlexTrace.getStateSystem();
+            IStateSystemQuerier ssq = ctfFlexTrace.getStateSystems().get(MyUstTrace.stateID);
             long startTime = ssq.getStartTime();
             long endTime = ssq.getCurrentEndTime() + 1;
             long resolution = (endTime - startTime) / fDisplayWidth;
@@ -114,7 +114,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
             long startTime, long endTime, long resolution,
             boolean includeNull, IProgressMonitor monitor) {
 
-        IStateSystemQuerier ssq = entry.getTrace().getStateSystem();
+        IStateSystemQuerier ssq = entry.getTrace().getStateSystems().get(MyUstTrace.stateID);
         startTime = Math.max(startTime, ssq.getStartTime());
         endTime = Math.min(endTime, ssq.getCurrentEndTime() + 1);
         if (endTime <= startTime) {

@@ -23,6 +23,7 @@ import org.eclipse.linuxtools.tmf.core.TmfCommonConstants;
 import org.eclipse.linuxtools.tmf.core.ctfadaptor.CtfTmfTrace;
 import org.eclipse.linuxtools.tmf.core.exceptions.TmfTraceException;
 import org.eclipse.linuxtools.tmf.core.statesystem.IStateChangeInput;
+import org.eclipse.linuxtools.tmf.core.statesystem.IStateSystemQuerier;
 import org.eclipse.linuxtools.tmf.core.statesystem.StateSystemManager;
 
 import ust.example.core.stateprovider.MyUstTraceInput;
@@ -34,6 +35,9 @@ import ust.example.core.stateprovider.MyUstTraceInput;
  * @author Alexandre Montplaisir
  */
 public class MyUstTrace extends CtfTmfTrace {
+
+    /** State system ID */
+    public final static String stateID = "ust-example"; //$NON-NLS-1$
 
     /**
      * The file name of the History Tree
@@ -78,6 +82,7 @@ public class MyUstTrace extends CtfTmfTrace {
         final File htFile = new File(supplDirectory + File.separator + HISTORY_TREE_FILE_NAME);
         final IStateChangeInput htInput = new MyUstTraceInput(this);
 
-        this.ss = StateSystemManager.loadStateHistory(htFile, htInput, false);
+        IStateSystemQuerier ss = StateSystemManager.loadStateHistory(htFile, htInput, false);
+        stateSystems.put(stateID, ss);
     }
 }
