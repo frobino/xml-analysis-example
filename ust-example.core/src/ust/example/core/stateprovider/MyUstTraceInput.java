@@ -26,7 +26,7 @@ import ust.example.core.trace.MyUstTrace;
 
 
 /**
- * State provider for CTF Flex traces.
+ * State provider for the "MyUstTrace" example.
  *
  * The resulting attribute tree will look like this:
  *
@@ -54,12 +54,7 @@ public class MyUstTraceInput extends AbstractStateChangeInput {
      *            The UST trace
      */
     public MyUstTraceInput(MyUstTrace trace) {
-        super(trace);
-    }
-
-    @Override
-    public ITmfEvent getExpectedEventType() {
-        return CtfTmfEvent.getNullEvent();
+        super(trace, CtfTmfEvent.class);
     }
 
     @Override

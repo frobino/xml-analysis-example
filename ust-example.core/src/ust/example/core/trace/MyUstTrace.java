@@ -23,7 +23,6 @@ import org.eclipse.linuxtools.tmf.core.TmfCommonConstants;
 import org.eclipse.linuxtools.tmf.core.ctfadaptor.CtfTmfTrace;
 import org.eclipse.linuxtools.tmf.core.exceptions.TmfTraceException;
 import org.eclipse.linuxtools.tmf.core.statesystem.IStateChangeInput;
-import org.eclipse.linuxtools.tmf.core.statesystem.IStateSystemQuerier;
 import org.eclipse.linuxtools.tmf.core.statesystem.StateSystemManager;
 
 import ust.example.core.stateprovider.MyUstTraceInput;
@@ -82,7 +81,6 @@ public class MyUstTrace extends CtfTmfTrace {
         final File htFile = new File(supplDirectory + File.separator + HISTORY_TREE_FILE_NAME);
         final IStateChangeInput htInput = new MyUstTraceInput(this);
 
-        IStateSystemQuerier ss = StateSystemManager.loadStateHistory(htFile, htInput, false);
-        stateSystems.put(stateID, ss);
+        ss = StateSystemManager.loadStateHistory(htFile, htInput, false);
     }
 }

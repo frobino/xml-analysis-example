@@ -34,9 +34,9 @@ import ust.example.core.trace.MyUstTrace;
 
 
 /**
- * Main implementation for the Flex Oscilloscope view
+ * Example implementation of a Connections View
  *
- * @author Patrick Tasse
+ * @author Alexandre Montplaisir
  */
 public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
 
@@ -73,7 +73,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
         for (ITmfTrace trace : experiment.getTraces()) {
             if (trace instanceof MyUstTrace) {
                 MyUstTrace ctfFlexTrace = (MyUstTrace) trace;
-                IStateSystemQuerier ssq = ctfFlexTrace.getStateSystems().get(MyUstTrace.stateID);
+                IStateSystemQuerier ssq = ctfFlexTrace.getStateSystem();
                 long startTime = ssq.getStartTime();
                 long endTime = ssq.getCurrentEndTime() + 1;
                 TraceEntry traceEntry = new TraceEntry(ctfFlexTrace, trace.getName(), startTime, endTime);
@@ -97,7 +97,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
         refresh();
         for (TraceEntry traceEntry : entryList) {
             ITmfTrace ctfFlexTrace = traceEntry.getTrace();
-            IStateSystemQuerier ssq = ctfFlexTrace.getStateSystems().get(MyUstTrace.stateID);
+            IStateSystemQuerier ssq = ((MyUstTrace) ctfFlexTrace).getStateSystem();
             long startTime = ssq.getStartTime();
             long endTime = ssq.getCurrentEndTime() + 1;
             long resolution = (endTime - startTime) / fDisplayWidth;
@@ -114,7 +114,7 @@ public class ConnectionsView extends AbstractTimeGraphView<ConnectionsEntry> {
             long startTime, long endTime, long resolution,
             boolean includeNull, IProgressMonitor monitor) {
 
-        IStateSystemQuerier ssq = entry.getTrace().getStateSystems().get(MyUstTrace.stateID);
+        IStateSystemQuerier ssq = ((MyUstTrace) entry.getTrace()).getStateSystem();
         startTime = Math.max(startTime, ssq.getStartTime());
         endTime = Math.min(endTime, ssq.getCurrentEndTime() + 1);
         if (endTime <= startTime) {
