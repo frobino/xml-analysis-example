@@ -27,7 +27,8 @@
 
 int main(int argc, char **argv)
 {
-	int nb_threads = 5;
+	int nb_threads = 8;
+	int nb_loops = 20;
 	int i;
 
 	srand(time(NULL));
@@ -35,7 +36,7 @@ int main(int argc, char **argv)
 	fprintf(stderr, "Tracing...\n");
 
 	#pragma omp parallel private(i) num_threads(nb_threads)
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < nb_loops; i++) {
 		int delay1 = rand() % 50000;
 		int delay2 = rand() % 50000;
 		int delay3 = rand() % 50000;
