@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmldefinition.xsd">
+
+	<stateProvider id="org.eclipse.linuxtools.ust.example" version="1">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Xml kernel State System" />
+		</head>
+
+		<!-- StateValues -->
+		<definedValue name="STATE_CONNECTING" value="0" />
+		<definedValue name="STATE_ESTABLISHED" value="1" />
+
+		<!-- Event handlers -->
+		<eventHandler eventName="ust_myprog:connection_wait">
+			<stateChange>
+				<stateAttribute type="constant" value="Threads" />
+				<stateAttribute type="eventField" value="id" />
+				<stateValue type="int" value="$STATE_CONNECTING" />
+			</stateChange>
+		</eventHandler>
+		<eventHandler eventName="ust_myprog:connection_start">
+			<stateChange>
+				<stateAttribute type="constant" value="Threads" />
+				<stateAttribute type="eventField" value="id" />
+				<stateValue type="int" value="$STATE_ESTABLISHED" />
+			</stateChange>
+		</eventHandler>
+		<eventHandler eventName="ust_myprog:connection_end">
+			<stateChange>
+				<stateAttribute type="constant" value="Threads" />
+				<stateAttribute type="eventField" value="id" />
+				<stateValue type="null" />
+			</stateChange>
+		</eventHandler>
+
+	</stateProvider>
+</tmfxml>
