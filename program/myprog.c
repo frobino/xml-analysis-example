@@ -39,24 +39,21 @@ int main(int argc, char **argv)
 
 	#pragma omp parallel private(i) num_threads(nb_threads)
 	for (i = 0; i < nb_loops; i++) {
-		int delay1 = rand() % 50000;
-		int delay2 = rand() % 50000;
-		int delay3 = rand() % 50000;
 		int id = omp_get_thread_num() + 1;
 
 		/* Loop starts here */
 
-		usleep(delay1);
+		usleep(rand() % 50000);
 
 		//Connection attempted
 		tracepoint(ust_myprog, connection_wait, id);
 
-		usleep(delay2);
+		usleep(rand() % 50000);
 
 		//Connection is established
 		tracepoint(ust_myprog, connection_start, id);
 
-		usleep(delay3);
+		usleep(rand() % 50000);
 
 		//Connection ends
 		tracepoint(ust_myprog, connection_end, id);

@@ -2,7 +2,7 @@
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="xmldefinition.xsd">
 
-	<stateSystemView id="org.eclipse.linuxtools.tmf.analysis.xml.sstimeview">
+	<timeGraphView id="org.eclipse.linuxtools.tmf.analysis.xml.sstimeview">
 		<head>
 			<analysis id="org.eclipse.linuxtools.ust.example" />
 			<label value="Example UST View" />
@@ -12,10 +12,8 @@
 		<definedValue name="STATE_ESTABLISHED" value="1" color="#00CC11" />
 
 		<!-- Time Graph View -->
-		<line path="Threads/*">
-			<entry path="Threads/*">
-				<display type="self" />
-			</entry>
-		</line>
-	</stateSystemView>
+		<entry path="Threads/*">
+			<display type="self" />
+		</entry>
+	</timeGraphView>
 </tmfxml>
