@@ -29,7 +29,7 @@
 
 int main(int argc, char **argv)
 {
-	int nb_threads = 8;
+	int nb_threads = 25;
 	int nb_loops = 20;
 	int i;
 
@@ -62,22 +62,5 @@ int main(int argc, char **argv)
 	fprintf(stderr, "Done.\n");
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

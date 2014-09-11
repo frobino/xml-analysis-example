@@ -5,7 +5,7 @@
 	<stateProvider id="org.eclipse.linuxtools.ust.example" version="1">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="Xml kernel State System" />
+			<label value="UST Example Analysis" />
 		</head>
 
 		<!-- StateValues -->
