@@ -26,11 +26,19 @@
 #define TRACEPOINT_DEFINE
 #include "ust_myprog.h"
 
+void workFor(int micros)
+{
+	clock_t start, end;
+	start = clock();
+	end = start + (micros / (CLOCKS_PER_SEC / 1000000));
+
+	while (clock() < end) {};
+}
 
 int main(int argc, char **argv)
 {
-	int nb_threads = 25;
-	int nb_loops = 20;
+	int nb_threads = 5;
+	int nb_loops = 10;
 	int i;
 
 	srand(time(NULL));
@@ -43,17 +51,17 @@ int main(int argc, char **argv)
 
 		/* Loop starts here */
 
-		usleep(rand() % 50000);
+		workFor(rand() % 50000);
 
 		//Connection attempted
 		tracepoint(ust_myprog, connection_wait, id);
 
-		usleep(rand() % 50000);
+		workFor(rand() % 50000);
 
 		//Connection is established
 		tracepoint(ust_myprog, connection_start, id);
 
-		usleep(rand() % 50000);
+		workFor(rand() % 50000);
 
 		//Connection ends
 		tracepoint(ust_myprog, connection_end, id);
@@ -62,5 +70,4 @@ int main(int argc, char **argv)
 	fprintf(stderr, "Done.\n");
 	return 0;
 }
-
 
