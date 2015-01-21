@@ -61,11 +61,12 @@ trace of the execution of this program:
     $ lttng start
     $ ./myprog
     $ lttng stop
+    $ lttng destroy
 
-At this stage you can use `lttng view` (which will require the `babeltrace`
-program to be installed) to display the contents of the trace. You should get
-tracepoints representing the different states every thread goes in (the 'id'
-field representing the thread number).
+Right before the `destroy` you can use `lttng view` (which will require the
+`babeltrace` program to be installed) to display the contents of the trace. You
+should get tracepoints representing the different states every thread goes in
+(the 'id' field representing the thread number).
 
 This is interesting, but ultimately not very useful: it is very hard to follow
 one particular thread, or to have a look at the big picture just by looking at
@@ -109,7 +110,9 @@ perspective.
 
 If you have done everything correctly, the view should display the states we
 have defined for each of the thread in the application, the "connecting" states
-in yellow and the "established" states in green.
+in yellow and the "established" states in green:
+
+![Expected results](results.png)
 
 Congratulations! You now know how to:
 * Instrument an application with UST tracepoints
