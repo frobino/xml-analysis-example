@@ -105,6 +105,9 @@ small triangle next to it, the subtree should display the list of available
 analyses for this trace. In there, there should be the "UST Example Analysis"
 that was imported with the XML file earlier. The sub-tree of the analysis itself
 should show its outputs; the custom view defined in the file should be there.
+
+![Project Explorer](project.png)
+
 If you double-click on the view's name, it will open the view in the current
 perspective.
 
@@ -136,13 +139,15 @@ Some extra homework for the avid reader:
   * Hint: you can take a kernel trace at the same time as the program trace
     (add a `lttng enable-event -k -a` before `lttng start`), load it into Trace
     Compass into an experiment with the UST trace, and look at the Resource View.
-    It should give some insight. (Well, it's quite obvious that "the CPUs are
-    overloaded!!!1" but it's nice to get a graphical confirmation.)
+    It should give some insight.
 
-* Add an additional state in the program, and display it in the view. This will
-  require adding a new tracepoint definition in `ust_myprog.h`, adding a
-  waitFor() and a tracepoint in the program, and adding the definition of this
-  state in the XML file. Then re-compile, re-trace, re-import everything.
+* Add an additional state in the program, and display it in the view in the
+  color of your choice.
+
+  * This will require adding a new tracepoint definition in `ust_myprog.h`,
+    adding a waitFor() and a tracepoint in the program, and adding the
+    definition of this state in the XML file. Then re-compile, re-trace,
+    reload the analysis, and open the new trace.
 
   * This can represent the case of adding a new tracepoint to an existing
     application, or simply to start tracking a tracepoint that was not used
