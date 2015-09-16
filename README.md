@@ -3,7 +3,7 @@ LTTng-UST + Trace Compass example
 
 This repo contains a mini-tutorial of sorts that shows how to:
 * Instrument a C application using [LTTng](http://lttng.org/) userspace tracepoints.
-* Define a custom XML analysis in [Trace Compass](http://eclipse.org/tracecompass).
+* Define a custom XML analysis in [Trace Compass](http://tracecompass.org/).
 * Demonstrate how these tools used together can hopefully help you debug your own applications.
 
 In this example, we have small custom C application that goes through different
@@ -18,7 +18,7 @@ To go through this tutorial, you will need:
 * lttng-tools and the lttng-ust libraries. See the [LTTng download page](http://lttng.org/download/).
   You will need the development files too, so if you install from distribution
   packages, do not forget to install the "liblttng-ust-dev" package or equivalent.
-* A recent version of [Trace Compass](http://projects.eclipse.org/projects/tools.tracecompass/downloads).
+* A recent version of [Trace Compass](http://tracecompass.org/#getting).
   You will need a Java JRE, at least version 7.
 * A local clone of this repository
 
