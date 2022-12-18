@@ -1,59 +1,44 @@
-#undef TRACEPOINT_PROVIDER
-#define TRACEPOINT_PROVIDER ust_myprog
+#undef LTTNG_UST_TRACEPOINT_PROVIDER
+#define LTTNG_UST_TRACEPOINT_PROVIDER ust_myprog
 
-#if !defined(_TRACEPOINT_UST_MYPROG_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
-#define _TRACEPOINT_UST_MYPROG_H
+#undef LTTNG_UST_TRACEPOINT_INCLUDE
+#define LTTNG_UST_TRACEPOINT_INCLUDE "./ust_myprog.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/*
- * Copyright (C) 2011  Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- */
+#if !defined(_UST_MYPROG_H) || defined(LTTNG_UST_TRACEPOINT_HEADER_MULTI_READ)
+#define _UST_MYPROG_H
 
 #include <lttng/tracepoint.h>
-#include <stdbool.h>
 
-TRACEPOINT_EVENT(ust_myprog, connection_start,
-	TP_ARGS(int, anint),
-	TP_FIELDS(
-		ctf_integer(int, id, anint)
-	)
+LTTNG_UST_TRACEPOINT_EVENT(
+	ust_myprog,
+	connection_start,
+    LTTNG_UST_TP_ARGS(
+        int, my_integer_arg
+    ),
+    LTTNG_UST_TP_FIELDS(
+        lttng_ust_field_integer(int, my_integer_field, my_integer_arg)
+    )
 )
 
-TRACEPOINT_EVENT(ust_myprog, connection_end,
-	TP_ARGS(int, anint),
-	TP_FIELDS(
-		ctf_integer(int, id, anint)
-	)
+LTTNG_UST_TRACEPOINT_EVENT(ust_myprog, connection_end,
+    LTTNG_UST_TP_ARGS(
+        int, my_integer_arg
+    ),
+    LTTNG_UST_TP_FIELDS(
+        lttng_ust_field_integer(int, my_integer_field, my_integer_arg)
+    )
 )
 
-TRACEPOINT_EVENT(ust_myprog, connection_wait,
-	TP_ARGS(int, anint),
-	TP_FIELDS(
-		ctf_integer(int, id, anint)
-	)
+LTTNG_UST_TRACEPOINT_EVENT(ust_myprog, connection_wait,
+    LTTNG_UST_TP_ARGS(
+        int, my_integer_arg
+    ),
+    LTTNG_UST_TP_FIELDS(
+        lttng_ust_field_integer(int, my_integer_field, my_integer_arg)
+    )
 )
 
-#endif /* _TRACEPOINT_UST_MYPROG_H */
-
-#undef TRACEPOINT_INCLUDE_FILE
-#define TRACEPOINT_INCLUDE_FILE ./ust_myprog.h
+#endif /* _UST_MYPROG_H */
 
 /* This part must be outside ifdef protection */
 #include <lttng/tracepoint-event.h>
-
-#ifdef __cplusplus 
-}
-#endif

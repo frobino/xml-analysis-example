@@ -23,7 +23,6 @@
 #include <unistd.h>
 #include <omp.h>
 
-#define TRACEPOINT_DEFINE
 #include "ust_myprog.h"
 
 void workFor(int micros)
@@ -54,17 +53,17 @@ int main(int argc, char **argv)
 		workFor(rand() % 50000);
 
 		//Connection attempted
-		tracepoint(ust_myprog, connection_wait, id);
+		lttng_ust_tracepoint(ust_myprog, connection_wait, id);
 
 		workFor(rand() % 50000);
 
 		//Connection is established
-		tracepoint(ust_myprog, connection_start, id);
+		lttng_ust_tracepoint(ust_myprog, connection_start, id);
 
 		workFor(rand() % 50000);
 
 		//Connection ends
-		tracepoint(ust_myprog, connection_end, id);
+		lttng_ust_tracepoint(ust_myprog, connection_end, id);
 	}
 	
 	fprintf(stderr, "Done.\n");
