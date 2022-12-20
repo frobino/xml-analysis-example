@@ -17,21 +17,21 @@
 		<eventHandler eventName="ust_myprog:connection_wait">
 			<stateChange>
 				<stateAttribute type="constant" value="Threads" />
-				<stateAttribute type="eventField" value="id" />
+				<stateAttribute type="eventField" value="my_integer_field" />
 				<stateValue type="int" value="$STATE_CONNECTING" />
 			</stateChange>
 		</eventHandler>
 		<eventHandler eventName="ust_myprog:connection_start">
 			<stateChange>
 				<stateAttribute type="constant" value="Threads" />
-				<stateAttribute type="eventField" value="id" />
+				<stateAttribute type="eventField" value="my_integer_field" />
 				<stateValue type="int" value="$STATE_ESTABLISHED" />
 			</stateChange>
 		</eventHandler>
 		<eventHandler eventName="ust_myprog:connection_end">
 			<stateChange>
 				<stateAttribute type="constant" value="Threads" />
-				<stateAttribute type="eventField" value="id" />
+				<stateAttribute type="eventField" value="my_integer_field" />
 				<stateValue type="null" />
 			</stateChange>
 		</eventHandler>
